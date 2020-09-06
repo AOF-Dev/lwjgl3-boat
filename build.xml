@@ -134,7 +134,7 @@
         </forEachModule>
     </target>
 
-    <target name="all" description="Builds LWJGL and runs the tests" depends="compile-templates, tests"/>
+    <target name="all" description="Builds LWJGL and runs the tests" depends="compile-templates, compile-native"/>
 
     <target name="-compile-generator" depends="init">
         <local name="generator-uptodate"/>

@@ -55,18 +55,23 @@ public final class ALC {
     public static void create() {
         String libName;
         switch (Platform.get()) {
+            case BOAT:
+                create("libopenal.so.1");
+                break;
             case LINUX:
             case MACOSX:
                 libName = "openal";
+                create(Configuration.OPENAL_LIBRARY_NAME.get(Platform.mapLibraryNameBundled(libName)));
                 break;
             case WINDOWS:
                 libName = "OpenAL";
+                create(Configuration.OPENAL_LIBRARY_NAME.get(Platform.mapLibraryNameBundled(libName)));
                 break;
             default:
                 throw new IllegalStateException();
         }
 
-        create(Configuration.OPENAL_LIBRARY_NAME.get(Platform.mapLibraryNameBundled(libName)));
+        
     }
 
     private static class SharedLibraryAL extends SharedLibrary.Delegate implements FunctionProviderLocal {

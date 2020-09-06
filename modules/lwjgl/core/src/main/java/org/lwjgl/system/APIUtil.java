@@ -8,6 +8,7 @@ import org.lwjgl.*;
 import org.lwjgl.system.linux.*;
 import org.lwjgl.system.macosx.*;
 import org.lwjgl.system.windows.*;
+import org.lwjgl.system.boat.*;
 
 import javax.annotation.*;
 import java.io.*;
@@ -121,6 +122,8 @@ public final class APIUtil {
                 return new WindowsLibrary(name);
             case LINUX:
                 return new LinuxLibrary(name);
+            case BOAT:
+                return new BoatLibrary(name);
             case MACOSX:
                 return MacOSXLibrary.create(name);
             default:

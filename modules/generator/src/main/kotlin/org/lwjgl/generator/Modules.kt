@@ -46,6 +46,11 @@ enum class Module(
         "org.lwjgl.system.libc",
         "Contains bindings to standard C library APIs."
     ),
+    CORE_BOAT(
+        "core.boat",
+        "org.lwjgl.system.boat",
+        "Contains bindings to native APIs specific to the Android operating system."
+    ),
     CORE_LINUX(
         "core.linux",
         "org.lwjgl.system.linux",

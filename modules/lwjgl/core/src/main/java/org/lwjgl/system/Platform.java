@@ -13,6 +13,18 @@ import static org.lwjgl.system.APIUtil.*;
 /** The platforms supported by LWJGL. */
 public enum Platform {
 
+    BOAT("Boat", "boat") {
+        private final Pattern SO = Pattern.compile("(?:^|/)lib\\w+[.]so(?:[.]\\d+)*$");
+
+        @Override
+        String mapLibraryName(String name) {
+            if (SO.matcher(name).find()) {
+                return name;
+            }
+
+            return System.mapLibraryName(name);
+        }
+    },
     LINUX("Linux", "linux") {
         private final Pattern SO = Pattern.compile("(?:^|/)lib\\w+[.]so(?:[.]\\d+)*$");
 
@@ -80,6 +92,8 @@ public enum Platform {
     private static final Function<String, String> bundledLibraryPathMapper;
 
     static {
+        current = BOAT;
+        /*
         String osName = System.getProperty("os.name");
         if (osName.startsWith("Windows")) {
             current = WINDOWS;
@@ -90,6 +104,7 @@ public enum Platform {
         } else {
             throw new LinkageError("Unknown platform: " + osName);
         }
+        */
 
         bundledLibraryNameMapper = getMapper(
             Configuration.BUNDLED_LIBRARY_NAME_MAPPER.get("default"),

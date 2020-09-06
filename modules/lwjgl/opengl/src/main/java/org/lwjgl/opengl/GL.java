@@ -97,6 +97,9 @@ public final class GL {
     public static void create() {
         SharedLibrary GL;
         switch (Platform.get()) {
+            case BOAT:
+                GL = Library.loadNative(GL.class, "org.lwjgl.opengl", Configuration.OPENGL_LIBRARY_NAME, "libGL.so.1");
+                break;
             case LINUX:
                 GL = Library.loadNative(GL.class, "org.lwjgl.opengl", Configuration.OPENGL_LIBRARY_NAME, "libGL.so.1", "libGL.so");
                 break;
@@ -160,6 +163,7 @@ public final class GL {
                         }
                     };
                     break;
+                case BOAT:
                 case LINUX:
                     functionProvider = new SharedLibraryGL(OPENGL) {
                         private final long glXGetProcAddress;

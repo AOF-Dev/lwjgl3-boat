@@ -94,18 +94,34 @@ This script is included in /build.xml and /config/update-dependencies.xml.
     <condition property="build.offline" value="${env.LWJGL_BUILD_OFFLINE}" else="false">
         <isset property="env.LWJGL_BUILD_OFFLINE"/>
     </condition>
-
+    
     <condition property="platform.linux">
-        <os name="Linux"/>
+        <and>
+            <os name="Linux"/>
+            <not>
+                <isset property="platform.boat" />
+            </not>
+        </and>
     </condition>
     <condition property="platform.macos">
-        <os name="Mac OS X"/>
+        <and>
+            <os name="Mac OS X"/>
+            <not>
+                <isset property="platform.boat" />
+            </not>
+        </and>
     </condition>
     <condition property="platform.windows">
-        <os family="Windows"/>
+        <and>
+            <os family="Windows"/>
+            <not>
+                <isset property="platform.boat" />
+            </not>
+        </and>
     </condition>
 
     <property name="platform" value="linux" if:set="platform.linux"/>
+    <property name="platform" value="boat" if:set="platform.boat"/>
     <property name="platform" value="macos" if:set="platform.macos"/>
     <property name="platform" value="windows" if:set="platform.windows"/>
 
@@ -335,6 +351,20 @@ This script is included in /build.xml and /config/update-dependencies.xml.
                 <property name="dest" value="${lib.native}/${module.@{module}.path}"/>
                 <mkdir dir="${dest}"/>
                 <get-quiet name="@{module} :: @{artifact}" url="https://build.lwjgl.org/${build.type}/${platform.remote}/${build.arch}/@{artifact}" dest="${dest}" skipexisting="false"/>
+            </sequential>
+        </sequential>
+    </macrodef>
+    
+    <macrodef name="copy-dependency">
+        <attribute name="module"/>
+        <attribute name="file"/>
+
+        <sequential>
+            <sequential if:true="${binding.@{module}}">
+                <local name="dest"/>
+                <property name="dest" value="${lib.native}/${module.@{module}.path}"/>
+                <mkdir dir="${dest}"/>
+                <copy todir="${dest}" file="@{file}"/>
             </sequential>
         </sequential>
     </macrodef>

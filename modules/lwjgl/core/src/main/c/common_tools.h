@@ -4,6 +4,9 @@
  */
 #pragma once
 
+#ifdef LWJGL_BOAT
+    #include "BoatConfig.h"
+#endif
 #ifdef LWJGL_WINDOWS
     #include "WindowsConfig.h"
 #endif
