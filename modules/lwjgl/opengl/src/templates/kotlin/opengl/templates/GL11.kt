@@ -1109,7 +1109,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
     GL11C reuse "DepthMask"
     GL11C reuse "DepthRange"
 
-    DeprecatedGL..DependsOn("GL_NV_vertex_buffer_unified_memory")..void(
+    DeprecatedGL..void(
         "DisableClientState",
         """
         Disables a client-side capability.
@@ -1174,7 +1174,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
         Unsafe..RawPointer..GLboolean.const.p("pointer", "the edge flag array data")
     )
 
-    DeprecatedGL..DependsOn("GL_NV_vertex_buffer_unified_memory")..void(
+    DeprecatedGL..void(
         "EnableClientState",
         """
         Enables a client-side capability.
