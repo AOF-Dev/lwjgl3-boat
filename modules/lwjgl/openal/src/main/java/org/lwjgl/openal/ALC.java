@@ -55,6 +55,9 @@ public final class ALC {
     public static void create() {
         String libName;
         switch (Platform.get()) {
+            case BOAT:
+                create("libopenal.so.1");
+                return;
             case LINUX:
             case MACOSX:
                 libName = "openal";
