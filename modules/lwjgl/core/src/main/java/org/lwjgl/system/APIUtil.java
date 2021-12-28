@@ -6,6 +6,7 @@ package org.lwjgl.system;
 
 import org.lwjgl.*;
 import org.lwjgl.system.linux.*;
+import org.lwjgl.system.boat.*;
 import org.lwjgl.system.macosx.*;
 import org.lwjgl.system.windows.*;
 
@@ -119,6 +120,8 @@ public final class APIUtil {
         switch (Platform.get()) {
             case WINDOWS:
                 return new WindowsLibrary(name);
+            case BOAT:
+                return new BoatLibrary(name);
             case LINUX:
                 return new LinuxLibrary(name);
             case MACOSX:
