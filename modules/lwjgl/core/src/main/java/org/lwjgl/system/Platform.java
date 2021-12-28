@@ -20,6 +20,18 @@ public enum Platform {
             return System.mapLibraryName(name);
         }
     },
+    BOAT("Boat") {
+        private final Pattern SO = Pattern.compile("(?:^|/)lib\\w+[.]so(?:[.]\\d+)*$");
+
+        @Override
+        String mapLibraryName(String name) {
+            if (SO.matcher(name).find()) {
+                return name;
+            }
+
+            return System.mapLibraryName(name);
+        }
+    },
     MACOSX("macOS") {
         private final Pattern DYLIB = Pattern.compile("(?:^|/)lib\\w+(?:[.]\\d+)*[.]dylib$");
 
@@ -50,7 +62,12 @@ public enum Platform {
         if (osName.startsWith("Windows")) {
             current = WINDOWS;
         } else if (osName.startsWith("Linux") || osName.startsWith("FreeBSD") || osName.startsWith("SunOS") || osName.startsWith("Unix")) {
-            current = LINUX;
+            String platformName = System.getProperty("lwjgl.platform");
+            if (platformName != null && platformName.startsWith("Boat")) {
+                current = BOAT;
+            } else {
+                current = LINUX;
+            }
         } else if (osName.startsWith("Mac OS X") || osName.startsWith("Darwin")) {
             current = MACOSX;
         } else {
