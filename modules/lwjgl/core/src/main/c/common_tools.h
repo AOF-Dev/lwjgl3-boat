@@ -10,6 +10,9 @@
 #ifdef LWJGL_LINUX
     #include "LinuxConfig.h"
 #endif
+#ifdef LWJGL_BOAT
+    #include "BoatConfig.h"
+#endif
 #ifdef LWJGL_MACOS
     #include "macOSConfig.h"
 #endif
