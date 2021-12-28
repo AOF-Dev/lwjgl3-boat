@@ -51,6 +51,11 @@ enum class Module(
         "org.lwjgl.system.linux",
         "Contains bindings to native APIs specific to the Linux operating system."
     ),
+    CORE_BOAT(
+        "core.boat",
+        "org.lwjgl.system.boat",
+        "Contains bindings to native APIs specific to the Boat platform."
+    ),
     CORE_MACOS(
         "core.macos",
         "org.lwjgl.system.macosx",
