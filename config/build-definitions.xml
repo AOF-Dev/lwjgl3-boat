@@ -91,7 +91,12 @@ This script is included in /build.xml and /config/update-dependencies.xml.
         <os family="Windows"/>
     </condition>
     <condition property="platform.linux">
-        <os name="Linux"/>
+        <and>
+            <os name="Linux"/>
+            <not>
+                <isset property="platform.boat" />
+            </not>
+        </and>
     </condition>
     <condition property="platform.freebsd">
         <os name="FreeBSD"/>
@@ -105,6 +110,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
     <property name="platform" value="windows" if:set="platform.windows"/>
     <property name="platform" value="linux" if:set="platform.linux"/>
+    <property name="platform" value="boat" if:set="platform.boat"/>
     <property name="platform" value="freebsd" if:set="platform.freebsd"/>
     <property name="platform" value="solaris" if:set="platform.solaris"/>
     <property name="platform" value="macos" if:set="platform.macos"/>
